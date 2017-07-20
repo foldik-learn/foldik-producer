@@ -24,7 +24,9 @@ public class Producer implements Runnable {
     public void run() {
         while (true) {
             try {
-                restTemplate.postForObject(targetUrl, name + UUID.randomUUID().toString(), String.class);
+                String message = name + UUID.randomUUID().toString();
+                LOGGER.info("Send message: {}", message);
+                restTemplate.postForObject(targetUrl, message, String.class);
                 Thread.sleep(2000);
             } catch (Exception t) {
                 LOGGER.error(t.getMessage());
